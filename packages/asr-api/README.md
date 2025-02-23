@@ -1,5 +1,11 @@
 # asr-api
 
+## Dev
+start fastapi app:
+```sh
+CFG_PATH=./configs/http_mode.json uv run fastapi dev src/asr_api/app.py
+```
+
 ## Docs
 
 To view swagger, go to `host:port/docs`.
@@ -47,10 +53,4 @@ To launch in this mode, combine http and queue configurations together:
     "queue_mode_settings": {...},
     "http_mode_settings": {...}
 }
-```
-
-
-## Dev
-```sh
-CFG_PATH=./configs/http_mode.json uv run fastapi dev src/asr_api/app.py
 ```

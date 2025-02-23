@@ -7,7 +7,11 @@
 
 Natural language processing service.
 
-## Getting Started
-- Packages
-    - [asr-api](./packages/asr-api)
-    - [common](./packages/common)
+## asr-api
+
+```sh
+docker build -t echo-hub/asr-api . -f ./docker/Dockerfile.asr-api
+docker run -p 6001:80 -e ./packages/asr-api/configs/http_mode.json echo-hub/asr-api
+```
+
+See [packages/asr-api](./packages/asr-api/) for additional info.
