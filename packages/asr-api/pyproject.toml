@@ -1,0 +1,24 @@
+[project]
+name = "asr-api"
+version = "0.1.0"
+description = "asr api"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic-settings>=2.7.1",
+    "common",
+    "fastapi[standard]>=0.115.8",
+    "pydantic>=2.10.6",
+    "asyncpg>=0.30.0",
+    "aio-pika>=9.5.4",
+]
+
+[tool.uv.sources]
+common = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = []

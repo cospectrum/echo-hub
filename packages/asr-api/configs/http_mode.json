@@ -1,0 +1,8 @@
+{
+    "http_mode_settings": {
+        "asr_model": {
+            "type": "whisper",
+            "cfg": {}
+        }
+    }
+}
