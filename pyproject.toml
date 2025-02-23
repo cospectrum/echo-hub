@@ -1,0 +1,20 @@
+[project]
+name = "echo-hub"
+version = "0.1.0"
+description = "echo-hub workspace"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[dependency-groups]
+dev = ["mypy>=1.15.0", "pytest>=8.3.4", "ruff>=0.9.6"]
+
+[tool.mypy]
+plugins = ['pydantic.mypy']
+
+[[tool.mypy.overrides]]
+module = 'faster_whisper'
+ignore_missing_imports = true
