@@ -25,10 +25,10 @@ jobs:
       - name: Install the project
         run: uv sync --all-packages --locked
       - name: ruff format
-        run: uv run ruff format --check
+        run: uv run ruff format --check .
       - name: ruff check
-        run: uv run ruff check
+        run: uv run ruff check .
       - name: mypy
         run: uv run mypy .
       - name: pytest
-        run: uv run pytest
+        run: uv run pytest .
