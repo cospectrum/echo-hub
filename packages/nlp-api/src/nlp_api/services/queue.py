@@ -4,8 +4,8 @@ import logging
 from contextlib import asynccontextmanager
 from typing import Annotated, AsyncIterator
 
-from common.schemas.common import BaseTask
 from fastapi import Depends
+from pydantic import BaseModel
 
 from nlp_api import dependencies
 from nlp_api.schemas.state import QueueModeState
@@ -31,10 +31,10 @@ class Queue:
         async with self._conn.channel() as ch:
             yield ch
 
-    async def publish_task(
+    async def fanout_msg(
         self,
         exchange_name: str,
-        task: BaseTask,
+        msg: BaseModel,
         *,
         channel: Channel,
     ) -> None:
@@ -42,6 +42,6 @@ class Queue:
             exchange_name,
             type=aio_pika.ExchangeType.FANOUT,
         )
-        msg = aio_pika.Message(task.model_dump_json().encode())
-        answer = await exchange.publish(msg, routing_key="")
-        logger.info("publish: %s", dict(answer=answer, task_id=task.id))
+        msg_ = aio_pika.Message(msg.model_dump_json().encode())
+        answer = await exchange.publish(msg_, routing_key="")
+        logger.info("fanout msg: %s", dict(exchange=exchange, answer=answer))

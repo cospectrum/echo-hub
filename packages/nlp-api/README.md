@@ -33,7 +33,7 @@ Config example:
 {
     "queue_mode_settings": {
         "s3": {
-            "base_url": "http://localhost:9000"
+            "url": "http://localhost:9000"
         },
         "rabbitmq": {
             "url": "amqp://user:pass@localhost:5672"
@@ -46,8 +46,8 @@ Config example:
 ```
 
 ### Http and queue mode
-In this mode, the api takes over the functionality of both modes that were described above.
-To launch in this mode, combine http and queue configurations together:
+In this mode, the api takes over the functionality of both `queue` and `http` modes that were described above.
+To launch in this mode, combine `http` and `queue` configurations together:
 ```sh
 {
     "queue_mode_settings": {...},

@@ -1,6 +1,4 @@
-from pydantic import BaseModel, HttpUrl
-
-from .common import BaseTask
+from pydantic import UUID4, BaseModel
 
 
 class TranscribeOptions(BaseModel):
@@ -21,6 +19,7 @@ class TranscribeResult(BaseModel):
     language_probability: float
 
 
-class TranscribeTask(BaseTask):
-    audio_url: HttpUrl
+class TranscribeTask(BaseModel):
+    trace_id: str
+    audio_key: UUID4
     options: TranscribeOptions | None = None

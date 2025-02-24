@@ -1,14 +1,10 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, UploadFile
 
-from common.schemas import (
-    TaskId,
-    TraceId,
-)
 from common import asr
+from pydantic import UUID4
 
 from nlp_api.services.queue_mode_transcriber import QueueModeTranscriber
-from nlp_api import dependencies as deps
 
 
 router = APIRouter()
@@ -19,15 +15,14 @@ ServiceDep = Annotated[QueueModeTranscriber, Depends(QueueModeTranscriber)]
 @router.post("/transcribe/task")
 async def post_transcribe_task(
     service: ServiceDep,
-    trace_id: Annotated[TraceId, Depends(deps.get_trace_id)],
     audio: UploadFile,
     options: asr.TranscribeOptions | None = None,
-) -> TaskId:
-    return await service.post_task(audio, options, trace_id=trace_id)
+) -> UUID4:
+    return await service.post_task(audio, options)
 
 
 @router.get("/transcribe/task")
 async def get_transcribe_task(
-    service: ServiceDep, task_id: TaskId
+    service: ServiceDep, audio_key: UUID4
 ) -> asr.TranscribeResult | None:
-    return await service.get_task_result(task_id)
+    return await service.get_task_result(audio_key)

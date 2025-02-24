@@ -1,15 +1,9 @@
-from uuid import uuid4
 from common import asr
-from common.schemas.common import TraceId
 from fastapi import Depends, FastAPI, Request
 
+from nlp_api.types import S3Client
 from nlp_api.schemas.config import ApiCfg, S3Settings, QueueModeSettings
 from nlp_api.schemas.state import ApiState, HttpModeState, QueueModeState
-
-
-def get_trace_id(request: Request) -> TraceId:
-    trace_id = uuid4()
-    return trace_id
 
 
 def get_app(request: Request) -> FastAPI:
@@ -50,3 +44,7 @@ def get_s3_settings(
     cfg: QueueModeSettings = Depends(get_queue_mode_settings),
 ) -> S3Settings:
     return cfg.s3
+
+
+def get_s3_client(state: QueueModeState = Depends(get_queue_mode_state)) -> S3Client:
+    return state.s3_client

@@ -1,6 +1,7 @@
 import contextlib
 import pathlib
 import aio_pika
+import aioboto3
 import asyncpg
 
 from contextlib import asynccontextmanager
@@ -74,9 +75,16 @@ async def create_queue_mode_state(
 ) -> AsyncIterator[state_schemas.QueueModeState]:
     async with contextlib.AsyncExitStack() as stack:
         pg_pool = await stack.enter_async_context(asyncpg.create_pool(cfg.postgres.url))
+
         rabbitmq_connection_ctx = await aio_pika.connect_robust(str(cfg.rabbitmq.url))
         rabbitmq_connection = await stack.enter_async_context(rabbitmq_connection_ctx)
+
+        s3_session = aioboto3.Session()
+        s3_client_ctx = s3_session.client("s3", endpoint_url=cfg.s3.url)
+        s3_client = await stack.enter_async_context(s3_client_ctx)  # type: ignore
+
         yield state_schemas.QueueModeState(
             pg_pool=pg_pool,
             rabbitmq_connection=rabbitmq_connection,
+            s3_client=s3_client,
         )

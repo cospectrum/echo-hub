@@ -4,11 +4,14 @@ import asyncpg
 from dataclasses import dataclass
 from common import asr
 
+from nlp_api.types import S3Client
+
 
 @dataclass
 class QueueModeState:
     pg_pool: asyncpg.Pool
     rabbitmq_connection: aio_pika.abc.AbstractConnection
+    s3_client: S3Client
 
 
 @dataclass

@@ -6,12 +6,22 @@ from typing_extensions import Self
 from common import asr
 
 
+class S3Buckets(BaseModel):
+    audio: str = "audio"
+
+
 class S3Settings(BaseModel):
-    base_url: HttpUrl
+    url: HttpUrl
+    buckets: S3Buckets = S3Buckets()
+
+
+class RabbitMQExchanges(BaseModel):
+    transcribe: str = "transcribe"
 
 
 class RabbitMQSettings(BaseModel):
     url: pydantic.AmqpDsn
+    exchanges: RabbitMQExchanges = RabbitMQExchanges()
 
 
 class PostgresSettings(BaseModel):
