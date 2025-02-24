@@ -25,7 +25,7 @@ class QueueModeTranscriber:
         self.queue = queue
         self.s3 = s3
 
-    async def publish_task(
+    async def post_task(
         self,
         audio: UploadFile,
         options: TranscribeOptions | None = None,

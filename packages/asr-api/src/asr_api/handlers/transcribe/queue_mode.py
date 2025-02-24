@@ -23,7 +23,7 @@ async def post_transcribe_task(
     audio: UploadFile,
     options: asr.TranscribeOptions | None = None,
 ) -> TaskId:
-    return await service.publish_task(audio, options, trace_id=trace_id)
+    return await service.post_task(audio, options, trace_id=trace_id)
 
 
 @router.get("/transcribe/task")

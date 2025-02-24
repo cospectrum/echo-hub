@@ -9,12 +9,12 @@ from typing import AsyncIterator
 from fastapi import FastAPI
 from common import asr
 
-from . import handlers
-
 from .env import Settings
-from .schemas import state as state_schemas
+from .log import configure_logging
 
-from .schemas.config import (
+from .. import handlers
+from ..schemas import state as state_schemas
+from ..schemas.config import (
     ApiCfg,
     HttpModeSettings,
     QueueModeSettings,
@@ -24,10 +24,10 @@ from .schemas.config import (
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = Settings()  # pyright: ignore[reportCallIssue]
-    raw_cfg = pathlib.Path(settings.cfg_path).read_bytes()
-    cfg = ApiCfg.model_validate_json(raw_cfg)
-    app.state.api_cfg = cfg
+    cfg = ApiCfg.model_validate_json(pathlib.Path(settings.cfg_path).read_bytes())
+    configure_logging(cfg)
 
+    app.state.api_cfg = cfg
     api_state: state_schemas.ApiState
     async with create_api_state(cfg) as api_state:
         app.state.api_state = api_state
