@@ -1,9 +1,9 @@
-# asr-api
+# nlp-api
 
 ## Dev
 start fastapi app:
 ```sh
-CFG_PATH=./configs/http_mode.json uv run fastapi dev src/asr_api/app.py
+CFG_PATH=./configs/http_mode.json uv run fastapi dev src/nlp_api/app.py
 ```
 
 ## Docs
@@ -13,7 +13,7 @@ Note that API depends on the configured `mode`.
 The API mode is determined from the cfg file (passed via `CFG_PATH` env variable).
 
 ### Http mode
-To run the `asr-api` in this mode, pass the config in the following format:
+To run the `nlp-api` in this mode, pass the config in the following format:
 ```sh
 {
     "http_mode_settings": {

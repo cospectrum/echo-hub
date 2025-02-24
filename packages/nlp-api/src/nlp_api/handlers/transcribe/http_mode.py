@@ -3,7 +3,7 @@ import asyncio
 import logging
 
 import common.asr as asr
-import asr_api.dependencies as deps
+import nlp_api.dependencies as deps
 
 from typing import Annotated
 from fastapi import APIRouter, Depends, UploadFile

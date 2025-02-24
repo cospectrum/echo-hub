@@ -1,9 +1,0 @@
-FROM python:3.11-slim-bookworm
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
-WORKDIR /app
-COPY . .
-RUN uv sync --frozen --no-cache --package=asr-api
-
-ENV CFG_PATH=./packages/asr-api/configs/http_mode.json
-CMD ["/app/.venv/bin/fastapi", "run", "packages/asr-api/src/asr_api/app.py", "--port", "80"]

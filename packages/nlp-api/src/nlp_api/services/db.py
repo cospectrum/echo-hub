@@ -7,8 +7,8 @@ from common import asr
 from common.schemas.common import TaskId
 from fastapi import Depends
 
-from asr_api import dependencies as deps
-from asr_api.schemas.state import QueueModeState
+from nlp_api import dependencies as deps
+from nlp_api.schemas.state import QueueModeState
 
 
 Conn: TypeAlias = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection

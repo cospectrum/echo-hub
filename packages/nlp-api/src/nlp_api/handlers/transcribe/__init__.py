@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from .queue_mode import router as queue_mode_router
 from .http_mode import router as http_mode_router
 
-from asr_api.schemas import config
+from nlp_api.schemas import config
 
 
 def build_transcribe_router(cfg: config.ApiCfg) -> APIRouter:

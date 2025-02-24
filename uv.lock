@@ -4,9 +4,9 @@ requires-python = ">=3.11"
 
 [manifest]
 members = [
-    "asr-api",
     "common",
     "echo-hub",
+    "nlp-api",
 ]
 
 [[package]]
@@ -58,32 +58,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/a3/73/199a98fc2dae33535
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/eb/e7f063ad1fec6b3178a3cd82d1a3c4de82cccf283fc42746168188e1cdd5/anyio-4.8.0-py3-none-any.whl", hash = "sha256:b5011f270ab5eb0abf13385f851315585cc37ef330dd88e27ec3d34d651fd47a", size = 96041 },
 ]
-
-[[package]]
-name = "asr-api"
-version = "0.1.0"
-source = { editable = "packages/asr-api" }
-dependencies = [
-    { name = "aio-pika" },
-    { name = "asyncpg" },
-    { name = "common" },
-    { name = "fastapi", extra = ["standard"] },
-    { name = "pydantic" },
-    { name = "pydantic-settings" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "aio-pika", specifier = ">=9.5.4" },
-    { name = "asyncpg", specifier = ">=0.30.0" },
-    { name = "common", editable = "packages/common" },
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.115.8" },
-    { name = "pydantic", specifier = ">=2.10.6" },
-    { name = "pydantic-settings", specifier = ">=2.7.1" },
-]
-
-[package.metadata.requires-dev]
-dev = []
 
 [[package]]
 name = "asyncpg"
@@ -704,6 +678,32 @@ sdist = { url = "https://files.pythonhosted.org/packages/98/a4/1ab47638b92648243
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2a/e2/5d3f6ada4297caebe1a2add3b126fe800c96f56dbe5d1988a2cbe0b267aa/mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d", size = 4695 },
 ]
+
+[[package]]
+name = "nlp-api"
+version = "0.1.0"
+source = { editable = "packages/nlp-api" }
+dependencies = [
+    { name = "aio-pika" },
+    { name = "asyncpg" },
+    { name = "common" },
+    { name = "fastapi", extra = ["standard"] },
+    { name = "pydantic" },
+    { name = "pydantic-settings" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "aio-pika", specifier = ">=9.5.4" },
+    { name = "asyncpg", specifier = ">=0.30.0" },
+    { name = "common", editable = "packages/common" },
+    { name = "fastapi", extras = ["standard"], specifier = ">=0.115.8" },
+    { name = "pydantic", specifier = ">=2.10.6" },
+    { name = "pydantic-settings", specifier = ">=2.7.1" },
+]
+
+[package.metadata.requires-dev]
+dev = []
 
 [[package]]
 name = "numpy"

@@ -7,8 +7,8 @@ from common.schemas import (
 )
 from common import asr
 
-from asr_api.services.queue_mode_transcriber import QueueModeTranscriber
-from asr_api import dependencies as deps
+from nlp_api.services.queue_mode_transcriber import QueueModeTranscriber
+from nlp_api import dependencies as deps
 
 
 router = APIRouter()

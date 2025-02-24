@@ -3,8 +3,8 @@ from common import asr
 from common.schemas.common import TraceId
 from fastapi import Depends, FastAPI, Request
 
-from asr_api.schemas.config import ApiCfg, S3Settings, QueueModeSettings
-from asr_api.schemas.state import ApiState, HttpModeState, QueueModeState
+from nlp_api.schemas.config import ApiCfg, S3Settings, QueueModeSettings
+from nlp_api.schemas.state import ApiState, HttpModeState, QueueModeState
 
 
 def get_trace_id(request: Request) -> TraceId:

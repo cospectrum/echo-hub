@@ -1,7 +1,7 @@
 import pytest
 import pathlib
 
-from asr_api.schemas import config
+from nlp_api.schemas import config
 
 
 ROOT = pathlib.Path(__file__).parent

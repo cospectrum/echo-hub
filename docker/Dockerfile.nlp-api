@@ -1,0 +1,9 @@
+FROM python:3.11-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+WORKDIR /app
+COPY . .
+RUN uv sync --frozen --no-cache --package=nlp-api
+
+ENV CFG_PATH=./packages/nlp-api/configs/http_mode.json
+CMD ["/app/.venv/bin/fastapi", "run", "packages/nlp-api/src/nlp_api/app.py", "--port", "80"]

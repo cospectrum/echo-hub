@@ -4,8 +4,8 @@ from typing import Annotated
 from fastapi import Depends, UploadFile
 from pydantic import HttpUrl
 
-from asr_api.schemas.config import S3Settings
-from asr_api import dependencies as deps
+from nlp_api.schemas.config import S3Settings
+from nlp_api import dependencies as deps
 
 
 logger = logging.getLogger(__name__)

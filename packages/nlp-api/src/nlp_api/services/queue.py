@@ -7,8 +7,8 @@ from typing import Annotated, AsyncIterator
 from common.schemas.common import BaseTask
 from fastapi import Depends
 
-from asr_api import dependencies
-from asr_api.schemas.state import QueueModeState
+from nlp_api import dependencies
+from nlp_api.schemas.state import QueueModeState
 
 
 logger = logging.getLogger(__name__)
