@@ -3,6 +3,7 @@
         "asr_model": {
             "type": "whisper",
             "cfg": {
+                "model_path": null,
                 "model_size": "tiny",
                 "device": "cpu"
             }
