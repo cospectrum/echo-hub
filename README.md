@@ -11,7 +11,7 @@ Natural language processing service.
 
 ```sh
 docker-compose build
-docker-compose up -d
+docker-compose up -d --wait
 ```
 ```sh
 docker-compose down -v

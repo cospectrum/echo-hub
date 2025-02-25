@@ -3,6 +3,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 COPY . .
+RUN apt-get -y update && apt-get -y install curl
 RUN uv sync --frozen --no-cache --package=nlp-api
 
 ENV CFG_PATH=./packages/nlp-api/configs/http_mode.json
