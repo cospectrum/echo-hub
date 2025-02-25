@@ -40,4 +40,4 @@ jobs:
         run: |
           pwd
           ls -lah
-          uv run pytest -v .
+          uv run pytest -v tests packages
