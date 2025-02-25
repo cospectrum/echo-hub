@@ -37,6 +37,7 @@ jobs:
           docker compose build
           docker compose up -d
           netstat -lt
+          docker ps -a
           pwd
           ls -lah
           export NLP_API_URL=http://0.0.0.0:6001
