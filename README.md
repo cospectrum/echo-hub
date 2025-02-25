@@ -33,7 +33,7 @@ See [packages/nlp-api](./packages/nlp-api/) for additional info.
 #### Separate docker build
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-api -t echo-hub/nlp-api
-docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-api
+docker run -p 6001:80 -e CFG_PATH=./packages/nlp-api/configs/http_mode.json echo-hub/nlp-api
 ```
 
 ### nlp-worker
@@ -41,5 +41,5 @@ See [packages/nlp-worker](./packages/nlp-worker/) for additional info.
 #### Separate docker build
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-worker -t echo-hub/nlp-worker
-docker run -e ./packages/nlp-worker/config.json echo-hub/nlp-worker
+docker run -e CFG_PATH=./packages/nlp-worker/config.json echo-hub/nlp-worker
 ```
