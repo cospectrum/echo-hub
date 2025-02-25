@@ -1,4 +1,10 @@
 # nlp-api
+An API that can convert `speech to text` in both synchronous and asynchronous modes.
+
+The API provides some auxiliary functions to improve observability, such as:
+- prometheus statistics via the `/metrics` endpoint
+- correlation identifier for logs using the `trace_id` (randomly generated or passed as the `X-Trace-Id` header)
+- `/ping` for health checks
 
 ## Dev
 start fastapi app:
