@@ -15,10 +15,10 @@ docker compose build
 docker compose up -d --wait
 ```
 
-### tests
+### test
 ```sh
 export NLP_API_URL=http://localhost:6001
-pytest -v tests packages
+pytest -v .
 ```
 
 ### down
