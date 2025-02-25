@@ -1,3 +1,4 @@
+import logging
 import asyncpg
 
 from contextlib import asynccontextmanager
@@ -11,6 +12,7 @@ from nlp_api import dependencies as deps
 from nlp_api.schemas.state import QueueModeState
 
 
+logger = logging.getLogger(__name__)
 Conn: TypeAlias = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection
 
 
@@ -31,13 +33,14 @@ class Db:
         self, audio_key: UUID4, *, connection: Conn
     ) -> asr.TranscribeResult | None:
         query = """
-            SELECT tt.data FROM transcribe_task tt
+            SELECT ttr.data FROM transcribe_task_result ttr
             WHERE
-                tt.audio_key = $1::uuid
-                AND tt.status = 'completed'
-                AND tt.data IS NOT NULL
+                ttr.audio_key = $1::uuid
+                AND ttr.data IS NOT NULL
         """
-        row = await connection.fetchrow(query, audio_key)
+        async with connection.transaction(readonly=True):
+            row = await connection.fetchrow(query, audio_key)
         if row is None:
             return None
-        return asr.TranscribeResult.model_validate(row["data"])
+        data: str = row["data"]
+        return asr.TranscribeResult.model_validate_json(data)

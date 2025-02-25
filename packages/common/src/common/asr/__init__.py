@@ -13,7 +13,7 @@ from .base import (
 
 class WhisperTaggedCfg(BaseModel):
     type: Literal["whisper"]
-    cfg: WhisperCfg
+    cfg: WhisperCfg = WhisperCfg()
 
 
 _Cfg = Annotated[Union[WhisperTaggedCfg], Field(discriminator="type")]

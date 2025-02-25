@@ -10,17 +10,29 @@ services:
     environment:
       - CFG_PATH=./packages/nlp-api/configs/http_and_queue_mode.json
     depends_on:
+      nlp-worker:
+        condition: service_started
+    healthcheck:
+      test: curl -f localhost:80/ping
+      interval: 3s
+      retries: 10
+      timeout: 2s
+    networks:
+      - echo-hub-network
+
+  nlp-worker:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.nlp-worker
+    environment:
+      - CFG_PATH=./packages/nlp-worker/config.json
+    depends_on:
       s3:
         condition: service_started
       queue:
         condition: service_healthy
       db:
         condition: service_healthy
-    healthcheck:
-      test: curl -f localhost:80/ping
-      interval: 3s
-      retries: 10
-      timeout: 2s
     networks:
       - echo-hub-network
 
