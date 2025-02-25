@@ -1,3 +1,4 @@
+import logging
 import asyncpg
 
 from contextlib import asynccontextmanager
@@ -11,6 +12,7 @@ from nlp_api import dependencies as deps
 from nlp_api.schemas.state import QueueModeState
 
 
+logger = logging.getLogger(__name__)
 Conn: TypeAlias = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection
 
 
@@ -40,4 +42,5 @@ class Db:
             row = await connection.fetchrow(query, audio_key)
         if row is None:
             return None
-        return asr.TranscribeResult.model_validate(row["data"])
+        data: str = row["data"]
+        return asr.TranscribeResult.model_validate_json(data)

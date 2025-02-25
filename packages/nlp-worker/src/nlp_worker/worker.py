@@ -42,9 +42,8 @@ def new_worker(cfg: WorkerCfg) -> Iterator["Worker"]:
             aws_secret_access_key=cfg.s3.secret_key,
         )
 
-        pika_conn = stack.enter_context(
-            pika.BlockingConnection(pika.ConnectionParameters(str(cfg.rabbitmq.url)))
-        )
+        pika_params = pika.URLParameters(str(cfg.rabbitmq.url))
+        pika_conn = stack.enter_context(pika.BlockingConnection(pika_params))
         channel: PikaChannel = stack.enter_context(pika_conn.channel())
 
         queue = cfg.rabbitmq.queue

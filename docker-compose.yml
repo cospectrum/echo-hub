@@ -35,6 +35,8 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    networks:
+      - echo-hub-network
 
   s3:
     image: minio/minio:latest
