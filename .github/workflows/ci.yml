@@ -30,5 +30,9 @@ jobs:
         run: uv run ruff check .
       - name: mypy
         run: uv run mypy .
+      - name: docker compose
+        run: |
+          docker compose build
+          docker compose up -d
       - name: pytest
         run: uv run pytest .
