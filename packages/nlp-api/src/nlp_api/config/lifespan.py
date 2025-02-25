@@ -38,6 +38,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     async with create_api_state(cfg) as api_state:
         app.state.api_state = api_state
         app.include_router(handlers.build_router(cfg))
+        logger.info("configured app")
         yield
 
 

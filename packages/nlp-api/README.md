@@ -14,7 +14,7 @@ The API mode is determined from the cfg file (passed via `CFG_PATH` env variable
 
 ### Http mode
 To run the `nlp-api` in this mode, pass the json config (via `CFG_PATH`) with the `"http_mode_settings"` field.
-For example, [./configs/queue_mode.json](./configs/http_mode.json).
+For example, [./configs/http_mode.json](./configs/http_mode.json).
 
 #### Requests
 Transcribe audio:
@@ -29,7 +29,7 @@ curl -X 'POST' \
 ### Queue mode
 In this mode, the api will be able to send tasks to `queue`.
 To run the `nlp-api` in this mode, pass the json config (via `CFG_PATH`) with the `"queue_mode_settings"` field.
-For example, [./configs/http_and_queue_mode.json](./configs/http_and_queue_mode.json).
+For example, [./configs/queue_mode.json](./configs/queue_mode.json).
 
 #### Requests
 Publish transcribe audio task and get the `audio_key` back:

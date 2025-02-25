@@ -10,7 +10,13 @@ dependencies = []
 members = ["packages/*"]
 
 [dependency-groups]
-dev = ["mypy>=1.15.0", "pytest>=8.3.4", "ruff>=0.9.6"]
+dev = [
+    "httpx>=0.28.1",
+    "mypy>=1.15.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "ruff>=0.9.6",
+]
 
 [tool.mypy]
 python_version = "3.11"
@@ -19,3 +25,6 @@ plugins = ['pydantic.mypy']
 [[tool.mypy.overrides]]
 module = ["asyncpg", "aioboto3", "faster_whisper"]
 follow_untyped_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
