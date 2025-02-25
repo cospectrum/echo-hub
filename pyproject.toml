@@ -23,7 +23,7 @@ python_version = "3.11"
 plugins = ['pydantic.mypy']
 
 [[tool.mypy.overrides]]
-module = ["asyncpg", "aioboto3", "faster_whisper"]
+module = ["asyncpg", "aioboto3", "faster_whisper", "pika/*"]
 follow_untyped_imports = true
 
 [tool.pytest.ini_options]

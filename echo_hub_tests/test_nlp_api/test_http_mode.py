@@ -2,7 +2,7 @@ import pytest
 import httpx
 
 from common.schemas.transcribe import TranscribeResult
-from tests.conftest import DATA_ROOT
+from echo_hub_tests.conftest import DATA_ROOT
 
 
 @pytest.mark.asyncio
