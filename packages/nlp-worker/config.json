@@ -1,7 +1,10 @@
 {
     "asr_model": {
         "type": "whisper",
-        "cfg": {}
+        "cfg": {
+            "model_size": "tiny",
+            "device": "cpu"
+        }
     },
     "s3": {
         "url": "http://s3:9000",

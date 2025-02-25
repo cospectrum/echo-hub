@@ -2,7 +2,10 @@
     "http_mode_settings": {
         "asr_model": {
             "type": "whisper",
-            "cfg": {}
+            "cfg": {
+                "model_size": "tiny",
+                "device": "cpu"
+            }
         }
     },
     "queue_mode_settings": {
