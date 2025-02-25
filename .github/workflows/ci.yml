@@ -44,3 +44,4 @@ jobs:
           ls -lah
           export NLP_API_URL=http://0.0.0.0:6001
           uv run pytest -v tests packages
+          netstat -lt
