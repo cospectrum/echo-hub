@@ -34,7 +34,9 @@ async def test_transcribe_task(
     result = None
     for _ in range(30):
         await asyncio.sleep(1)
-        response = await nlp_api_client.get(ROUTE, params=dict(audio_key=str(audio_key)))
+        response = await nlp_api_client.get(
+            ROUTE, params=dict(audio_key=str(audio_key))
+        )
         assert response.status_code == 200
         payload = response.json()
         if payload is None:
