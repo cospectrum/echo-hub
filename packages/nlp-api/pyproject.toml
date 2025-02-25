@@ -12,6 +12,7 @@ dependencies = [
     "asyncpg>=0.30.0",
     "aio-pika>=9.5.4",
     "aioboto3>=14.0.0",
+    "prometheus-fastapi-instrumentator>=7.0.2",
 ]
 
 [tool.uv.sources]

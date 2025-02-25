@@ -8,19 +8,20 @@
 Natural language processing service.
 
 ## Getting Started
-start:
+
+### start
 ```sh
 docker compose build
 docker compose up -d --wait
 ```
 
-tests:
+### tests
 ```sh
 export NLP_API_URL=http://localhost:6001
 pytest -v tests packages
 ```
 
-down:
+### down
 ```sh
 docker compose down -v
 ```
@@ -29,7 +30,7 @@ docker compose down -v
 
 ### nlp-api
 See [packages/nlp-api](./packages/nlp-api/) for additional info.
-#### Docker
+#### Separate docker build
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-api -t echo-hub/nlp-api
 docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-api
@@ -37,7 +38,7 @@ docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-
 
 ### nlp-worker
 See [packages/nlp-worker](./packages/nlp-worker/) for additional info.
-#### Docker
+#### Separate docker build
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-worker -t echo-hub/nlp-worker
 docker run -e ./packages/nlp-worker/config.json echo-hub/nlp-worker
