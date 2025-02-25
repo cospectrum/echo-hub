@@ -32,7 +32,9 @@ jobs:
         run: uv run mypy .
       - name: docker compose
         run: |
+          docker --version
+          docker compose --version
           docker compose build
           docker compose up -d
       - name: pytest
-        run: uv run pytest .
+        run: uv run pytest -v .

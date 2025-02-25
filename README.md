@@ -3,7 +3,7 @@
 [![ci]](https://github.com/cospectrum/echo-hub/actions)
 
 [github]: https://img.shields.io/badge/github-cospectrum/echo--hub-8da0cb?logo=github
-[ci]: https://github.com/cospectrum/echo-hub/workflows/ci/badge.svg
+[ci]: https://github.com/cospectrum/echo-hub/workflows/ci/badge.svg?branch=main
 
 Natural language processing service.
 
