@@ -18,7 +18,7 @@ async def test_post_task(
     filename: str,
     nlp_api_client: httpx.AsyncClient,
 ) -> None:
-    ROUTE = "/task/transcribe"
+    ROUTE = "/transcribe/task"
     audio_path = DATA_ROOT / "audio" / filename
     assert audio_path.exists(), f"expected {audio_path=} to exist"
 
@@ -35,7 +35,7 @@ async def test_post_task(
 async def test_get_random_task(
     nlp_api_client: httpx.AsyncClient,
 ) -> None:
-    ROUTE = "/task/transcribe"
+    ROUTE = "/transcribe/task"
 
     audio_key = uuid.uuid4()
     response = await nlp_api_client.get(ROUTE, params=dict(audio_key=str(audio_key)))
