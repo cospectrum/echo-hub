@@ -1,15 +1,9 @@
-import os
 import pytest
 import httpx
-import pathlib
 
 from typing import AsyncIterator
 
-
-NLP_API_URL = os.getenv("NLP_API_URL", "http://localhost:6001")
-
-TESTS_ROOT = pathlib.Path(__file__).parent
-DATA_ROOT = TESTS_ROOT.parent / "data"
+from .const import NLP_API_URL
 
 
 @pytest.fixture
