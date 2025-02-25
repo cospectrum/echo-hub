@@ -38,5 +38,7 @@ jobs:
           docker compose up -d
       - name: pytest
         run: |
+          pwd
           ls -lah
+          ls -lah postgres-data
           uv run pytest -v .
