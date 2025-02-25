@@ -10,16 +10,12 @@ dependencies = []
 members = ["packages/*"]
 
 [dependency-groups]
-dev = [
-    "mypy>=1.15.0",
-    "pytest>=8.3.4",
-    "ruff>=0.9.6",
-]
+dev = ["mypy>=1.15.0", "pytest>=8.3.4", "ruff>=0.9.6"]
 
 [tool.mypy]
 python_version = "3.11"
 plugins = ['pydantic.mypy']
 
 [[tool.mypy.overrides]]
-module = ["asyncpg", "faster_whisper"]
+module = ["asyncpg", "aioboto3", "faster_whisper"]
 follow_untyped_imports = true

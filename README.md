@@ -7,11 +7,22 @@
 
 Natural language processing service.
 
-## asr-api
+## docker-compose
 
 ```sh
-docker build . -f ./docker/Dockerfile.asr-api -t echo-hub/asr-api
-docker run -p 6001:80 -e ./packages/asr-api/configs/http_mode.json echo-hub/asr-api
+docker-compose build
+
+docker-compose up -d
+docker-compose down -v
 ```
 
-See [packages/asr-api](./packages/asr-api/) for additional info.
+## packages
+
+### nlp-api
+
+```sh
+docker build . -f ./docker/Dockerfile.nlp-api -t echo-hub/nlp-api
+docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-api
+```
+
+See [packages/nlp-api](./packages/nlp-api/) for additional info.
