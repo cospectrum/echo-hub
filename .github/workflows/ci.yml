@@ -33,8 +33,10 @@ jobs:
       - name: docker compose
         run: |
           docker --version
-          docker compose --version
+          docker compose version
           docker compose build
           docker compose up -d
       - name: pytest
-        run: uv run pytest -v .
+        run: |
+          ls -lah
+          uv run pytest -v .
