@@ -40,3 +40,5 @@ async def test_get_random_task(
     audio_key = uuid.uuid4()
     response = await nlp_api_client.get(ROUTE, params=dict(audio_key=str(audio_key)))
     assert response.status_code == 200
+    body = response.json()
+    assert body is None
