@@ -37,3 +37,8 @@ docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-
 
 ### nlp-worker
 See [packages/nlp-worker](./packages/nlp-worker/) for additional info.
+#### Docker
+```sh
+docker build . -f ./docker/Dockerfile.nlp-worker -t echo-hub/nlp-worker
+docker run -e ./packages/nlp-worker/config.json echo-hub/nlp-worker
+```

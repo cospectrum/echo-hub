@@ -24,8 +24,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.nlp-worker
-    ports:
-      - "6101:80"
     environment:
       - CFG_PATH=./packages/nlp-worker/config.json
     depends_on:

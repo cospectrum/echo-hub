@@ -5,5 +5,5 @@ WORKDIR /app
 COPY . .
 RUN uv sync --frozen --no-cache --package=nlp-worker
 
-ENV CFG_PATH=./packages/nlp-worker/config.json
+ENV CFG_PATH=./config.json
 CMD ["uv", "run", "--no-sync", "packages/nlp-worker/main.py"]
