@@ -40,4 +40,5 @@ jobs:
         run: |
           pwd
           ls -lah
+          export NLP_API_URL=http://nlp-api:6001
           uv run pytest -v tests packages

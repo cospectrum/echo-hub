@@ -11,18 +11,24 @@ Natural language processing service.
 
 ```sh
 docker-compose build
-
 docker-compose up -d
+```
+```sh
 docker-compose down -v
+```
+
+## tests
+```sh
+export NLP_API_URL=http://localhost:6001
+pytest -v tests packages
 ```
 
 ## packages
 
 ### nlp-api
-
+See [packages/nlp-api](./packages/nlp-api/) for additional info.
+#### Docker
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-api -t echo-hub/nlp-api
 docker run -p 6001:80 -e ./packages/nlp-api/configs/http_mode.json echo-hub/nlp-api
 ```
-
-See [packages/nlp-api](./packages/nlp-api/) for additional info.
