@@ -30,6 +30,7 @@ def new_worker(cfg: WorkerCfg) -> Iterator["Worker"]:
         pg_pool_ctx = psycopg_pool.ConnectionPool(
             str(cfg.postgres.url),
             num_workers=1,
+            min_size=1,
             max_size=1,
         )
         pg_pool: psycopg_pool.ConnectionPool = stack.enter_context(pg_pool_ctx)  # type: ignore

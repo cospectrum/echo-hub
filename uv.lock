@@ -975,6 +975,7 @@ name = "nlp-worker"
 version = "0.1.0"
 source = { editable = "packages/nlp-worker" }
 dependencies = [
+    { name = "boto3" },
     { name = "common" },
     { name = "pika" },
     { name = "psycopg", extra = ["binary"] },
@@ -990,6 +991,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "boto3", specifier = ">=1.36.23" },
     { name = "common", editable = "packages/common" },
     { name = "pika", specifier = ">=1.3.2" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2.5" },
