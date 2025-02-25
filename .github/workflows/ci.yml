@@ -36,6 +36,7 @@ jobs:
           docker compose version
           docker compose build
           docker compose up -d
+          sleep 30
           netstat -lt
           docker ps -a
           pwd
