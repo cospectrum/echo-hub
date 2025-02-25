@@ -42,6 +42,7 @@ async def test_transcribe_task(
         if payload is None:
             continue
         result = asr.TranscribeResult.model_validate(payload)
+        break
     assert result is not None
     assert result.language == language
     actual_segments = [seg.text.strip() for seg in result.segments]
