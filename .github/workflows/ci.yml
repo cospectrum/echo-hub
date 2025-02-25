@@ -40,5 +40,4 @@ jobs:
         run: |
           pwd
           ls -lah
-          ls -lah postgres-data
           uv run pytest -v .
