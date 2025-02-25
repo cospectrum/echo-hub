@@ -1,13 +1,15 @@
 {
     "queue_mode_settings": {
         "s3": {
-            "url": "http://localhost:9000"
+            "url": "http://s3:9000",
+            "access_key": "s3-admin",
+            "secret_key": "s3-admin-qwerty"
         },
         "rabbitmq": {
-            "url": "amqp://user:pass@localhost:5672"
+            "url": "amqp://rabbit:qwerty@queue:5672"
         },
         "postgres": {
-            "url": "postgres://user:pass@localhost:5432"
+            "url": "postgres://elephant:qwerty@db:5432/echo_chamber"
         }
     }
 }

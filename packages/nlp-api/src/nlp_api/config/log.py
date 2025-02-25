@@ -17,8 +17,10 @@ def configure_logging(cfg: ApiCfg) -> None:
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
+    filelog_cfg = cfg.loggers.rotating_file
     filelog = logging.handlers.RotatingFileHandler(
-        filename="logs.log", maxBytes=100 * MiB
+        filename=filelog_cfg.filename,
+        maxBytes=100 * MiB if filelog_cfg.max_bytes is None else filelog_cfg.max_bytes,
     )
     filelog.addFilter(CtxFilter())
     filelog.setFormatter(syslog_formatter)

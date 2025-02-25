@@ -12,6 +12,8 @@ class S3Buckets(BaseModel):
 
 class S3Settings(BaseModel):
     url: HttpUrl
+    access_key: str
+    secret_key: str
     buckets: S3Buckets = S3Buckets()
 
 
@@ -38,7 +40,17 @@ class HttpModeSettings(BaseModel):
     asr_model: asr.AsrModelCfg
 
 
+class RotatingFileLoggerCfg(BaseModel):
+    filename: str = "./logs.log"
+    max_bytes: int | None = None
+
+
+class LoggersCfg(BaseModel):
+    rotating_file: RotatingFileLoggerCfg = RotatingFileLoggerCfg()
+
+
 class ApiCfg(BaseModel):
+    loggers: LoggersCfg = LoggersCfg()
     queue_mode_settings: QueueModeSettings | None = None
     http_mode_settings: HttpModeSettings | None = None
 

@@ -31,7 +31,7 @@ def get_asr_model(state: HttpModeState = Depends(get_http_mode_state)) -> asr.As
 
 
 def get_api_cfg(app: FastAPI = Depends(get_app)) -> ApiCfg:
-    return app.state.api_config
+    return app.state.api_cfg
 
 
 def get_queue_mode_settings(cfg: ApiCfg = Depends(get_api_cfg)) -> QueueModeSettings:

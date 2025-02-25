@@ -7,7 +7,18 @@
 
 Natural language processing service.
 
-## nlp-api
+## docker-compose
+
+```sh
+docker-compose build
+
+docker-compose up -d
+docker-compose down -v
+```
+
+## packages
+
+### nlp-api
 
 ```sh
 docker build . -f ./docker/Dockerfile.nlp-api -t echo-hub/nlp-api

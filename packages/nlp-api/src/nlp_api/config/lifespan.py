@@ -3,12 +3,15 @@ import pathlib
 import aio_pika
 import aioboto3
 import asyncpg
+import logging
 
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
-
 from fastapi import FastAPI
+
 from common import asr
+
+from nlp_api.types import S3Client
 
 from .env import Settings
 from .log import configure_logging
@@ -20,6 +23,8 @@ from ..schemas.config import (
     HttpModeSettings,
     QueueModeSettings,
 )
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -74,14 +79,25 @@ async def create_queue_mode_state(
     cfg: QueueModeSettings,
 ) -> AsyncIterator[state_schemas.QueueModeState]:
     async with contextlib.AsyncExitStack() as stack:
-        pg_pool = await stack.enter_async_context(asyncpg.create_pool(cfg.postgres.url))
+        pg_pool = await stack.enter_async_context(
+            asyncpg.create_pool(str(cfg.postgres.url))
+        )
 
         rabbitmq_connection_ctx = await aio_pika.connect_robust(str(cfg.rabbitmq.url))
         rabbitmq_connection = await stack.enter_async_context(rabbitmq_connection_ctx)
 
-        s3_session = aioboto3.Session()
-        s3_client_ctx = s3_session.client("s3", endpoint_url=cfg.s3.url)
-        s3_client = await stack.enter_async_context(s3_client_ctx)  # type: ignore
+        s3_session = aioboto3.Session(
+            aws_access_key_id=cfg.s3.access_key,
+            aws_secret_access_key=cfg.s3.secret_key,
+        )
+        s3_client_ctx = s3_session.client("s3", endpoint_url=str(cfg.s3.url))
+        s3_client: S3Client = await stack.enter_async_context(s3_client_ctx)  # type: ignore
+        buckets = [cfg.s3.buckets.audio]
+        for bucket in buckets:
+            try:
+                await s3_client.create_bucket(Bucket=bucket)
+            except Exception as e:
+                logger.warning("failed to create bucket: %s", e)
 
         yield state_schemas.QueueModeState(
             pg_pool=pg_pool,

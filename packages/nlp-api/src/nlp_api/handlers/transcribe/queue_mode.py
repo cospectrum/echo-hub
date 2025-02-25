@@ -16,9 +16,8 @@ ServiceDep = Annotated[QueueModeTranscriber, Depends(QueueModeTranscriber)]
 async def post_transcribe_task(
     service: ServiceDep,
     audio: UploadFile,
-    options: asr.TranscribeOptions | None = None,
 ) -> UUID4:
-    return await service.post_task(audio, options)
+    return await service.post_task(audio)
 
 
 @router.get("/transcribe/task")

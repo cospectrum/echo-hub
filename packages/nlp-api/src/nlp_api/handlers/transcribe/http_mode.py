@@ -19,10 +19,9 @@ AsrModelDep = Annotated[asr.AsrModel, Depends(deps.get_asr_model)]
 async def transcribe(
     model: AsrModelDep,
     audio: UploadFile,
-    options: asr.TranscribeOptions | None = None,
 ) -> asr.TranscribeResult:
     audio_bytes = await audio.read()
     logger.info("%s", dict(audio_len=len(audio_bytes)))
     return await asyncio.to_thread(
-        lambda: model.speech_to_text(io.BytesIO(audio_bytes), options)
+        lambda: model.speech_to_text(io.BytesIO(audio_bytes))
     )

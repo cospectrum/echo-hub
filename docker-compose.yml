@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  nlp-api:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.nlp-api
+    ports:
+      - "6001:80"
+    environment:
+      - CFG_PATH=./packages/nlp-api/configs/http_and_queue_mode.json
+    depends_on:
+      s3:
+        condition: service_started
+      queue:
+        condition: service_healthy
+      db:
+        condition: service_started
+    networks:
+      - echo-hub-network
+
+  s3:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"  # MinIO api
+      - "9001:9001"  # MinIO UI console
+    environment:
+      - MINIO_ROOT_USER=s3-admin
+      - MINIO_ROOT_PASSWORD=s3-admin-qwerty
+    volumes:
+      - ./minio-data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - echo-hub-network
+
+  queue:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # AMQP port
+      - "15672:15672"  # UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbit
+      - RABBITMQ_DEFAULT_PASS=qwerty
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+    networks:
+      - echo-hub-network
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=elephant
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=echo_chamber
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - echo-hub-network
+
+networks:
+  echo-hub-network:
+    driver: bridge
