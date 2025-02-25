@@ -30,19 +30,14 @@ jobs:
         run: uv run ruff check .
       - name: mypy
         run: uv run mypy .
-      - name: docker compose
+      - name: pytest
         run: |
           docker --version
           docker compose version
           docker compose build
           docker compose up -d
-      - name: netstat
-        run: netstat -lt
-      - name: pytest
-        run: |
+          netstat -lt
           pwd
           ls -lah
           export NLP_API_URL=http://0.0.0.0:6001
           uv run pytest -v tests packages
-      - name: netstat after
-        run: netstat -lt
