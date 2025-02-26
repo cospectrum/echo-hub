@@ -15,7 +15,7 @@ from echo_hub_tests.const import DATA_ROOT
 async def test_transcribe(
     filename: str,
     language: str,
-    segments: str,
+    segments: list[str],
     nlp_api_client: httpx.AsyncClient,
 ) -> None:
     audio_path = DATA_ROOT / "audio" / filename
