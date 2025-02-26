@@ -17,7 +17,7 @@ from common import asr
 async def test_transcribe_task(
     filename: str,
     language: str,
-    segments: str,
+    segments: list[str],
     nlp_api_client: httpx.AsyncClient,
 ) -> None:
     ROUTE = "/transcribe/task"
