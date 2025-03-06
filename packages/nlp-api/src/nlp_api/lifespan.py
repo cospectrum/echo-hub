@@ -26,6 +26,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 def build_routes(state: ApiState) -> APIRouter:
     router = APIRouter()
+    router.include_router(handlers.common.router)
     if state.speech_to_text_model:
         router.include_router(handlers.speech_to_text.router)
     return router

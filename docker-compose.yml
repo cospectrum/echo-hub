@@ -1,0 +1,20 @@
+services:
+  nlp-api:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.nlp-api
+    ports:
+      - "6001:80"
+    environment:
+      - CFG_PATH=./packages/nlp-api/configs/http_mode.json
+    healthcheck:
+      test: curl -f localhost:80/ping
+      interval: 3s
+      retries: 10
+      timeout: 2s
+    networks:
+      - echo-hub-network
+
+networks:
+  echo-hub-network:
+    driver: bridge

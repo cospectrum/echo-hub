@@ -30,5 +30,14 @@ jobs:
         run: uv run ruff check .
       - name: mypy
         run: uv run mypy .
+      - name: docker
+        run: |
+          docker --version
+          docker compose version
+          docker compose build
+          docker compose up -d --wait
+          docker ps -a
       - name: pytest
-        run: uv run coverage run -m pytest .
+        run: |
+          export NLP_API_URL=http://0.0.0.0:6001
+          uv run coverage run -m pytest echo_hub_tests packages
