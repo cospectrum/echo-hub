@@ -1,0 +1,7 @@
+{
+    "speech_to_text": {
+        "model_path": null,
+        "model_size": "tiny",
+        "device": "cpu"
+    }
+}
