@@ -32,12 +32,13 @@ async def test_speech_to_text_task(
 
     body = response.json()
     audio_key = uuid.UUID(body)
-    result = None
-    coro = nlp_api_client.get(ROUTE, params={"audio_key": str(audio_key)})
-    response = await backoff(coro)
-    assert response.status_code == 200
 
-    result = stt.SpeechToTextResult.model_validate(response.json())
+    async def get_result() -> stt.SpeechToTextResult:
+        response = await nlp_api_client.get(ROUTE, params={"audio_key": str(audio_key)})
+        assert response.status_code == 200
+        return stt.SpeechToTextResult.model_validate(response.json())
+
+    result = await backoff(get_result())
     assert result.language == language
     actual_segments = [seg.text.strip() for seg in result.segments]
     assert actual_segments == segments
