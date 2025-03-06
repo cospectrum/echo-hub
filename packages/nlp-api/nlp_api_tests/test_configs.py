@@ -1,5 +1,3 @@
-import pathlib
-
 import pytest
 from nlp_api.state import ApiCfg
 
@@ -7,12 +5,12 @@ from .const import CONFIGS_ROOT
 
 
 @pytest.mark.parametrize(
-    ["path"],
+    ["filename"],
     [
         ("http_mode.json",),
     ],
 )
-def test_configs(path: str | pathlib.Path) -> None:
-    path = CONFIGS_ROOT / path
+def test_configs(filename: str) -> None:
+    path = CONFIGS_ROOT / filename
     assert path.exists(), f"expected {path} to exists"
     ApiCfg.model_validate_json(path.read_bytes())
