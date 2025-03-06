@@ -13,6 +13,10 @@ Key = UUID4
 
 @dataclass
 class S3:
+    """
+    S3 helper.
+    """
+
     client: S3Client
 
     async def create_buckets(self, buckets: set[str]) -> None:

@@ -1,3 +1,11 @@
+"""
+Contains a `Worker` for `speech_to_text`, which is primarily a CPU-bound task.
+
+The `Worker` retrieves `audio_key` values one by one from RabbitMQ,
+fetches the corresponding audio file from S3, runs the speech_to_text model,
+and saves the result to the database if the model succeeds.
+"""
+
 import io
 import logging
 from dataclasses import dataclass

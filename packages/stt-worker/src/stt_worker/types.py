@@ -1,3 +1,7 @@
+"""
+Module for useful type aliases.
+"""
+
 import typing
 
 if typing.TYPE_CHECKING:

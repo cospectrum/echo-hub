@@ -71,7 +71,7 @@ async def build_state(cfg: ApiCfg) -> AsyncIterator[ApiState]:
                 aws_secret_access_key=cfg.s3.secret_key,
             )
             s3_client_ctx = s3_session.client("s3", endpoint_url=str(cfg.s3.url))
-            s3_client: types.S3Client = await stack.enter_async_context(s3_client_ctx)
+            s3_client: types.S3Client = await stack.enter_async_context(s3_client_ctx)  # pyright: ignore
             s3 = helpers.S3(s3_client)
             buckets = [cfg.s3.buckets.audio]
             await s3.create_buckets(set(buckets))

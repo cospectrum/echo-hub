@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Queue:
+    """
+    Queue helper for interfacing with RabbitMQ.
+    """
+
     conn: aio_pika.abc.AbstractConnection
 
     async def fanout_msg(
