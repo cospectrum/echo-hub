@@ -69,7 +69,7 @@ class Worker:
 
     def _save_result(self, audio_key: UUID4, result: stt.SpeechToTextResult) -> None:
         query = """
-            INSERT INTO transcribe_task_result (audio_key, data)
+            INSERT INTO speech_to_text_task_result (audio_key, data)
             VALUES (%s, %s::jsonb)
             ON CONFLICT DO NOTHING
         """

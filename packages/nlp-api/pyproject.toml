@@ -6,6 +6,9 @@ readme = "README.md"
 authors = [{ name = "Alex Severin", email = "severinalexeyv@gmail.com" }]
 requires-python = "==3.11.11"
 dependencies = [
+    "asyncpg>=0.30.0",
+    "aio-pika>=9.5.4",
+    "aioboto3>=14.0.0",
     "common",
     "fastapi[standard]>=0.115.11",
     "prometheus-fastapi-instrumentator>=7.0.2",
@@ -19,3 +22,6 @@ build-backend = "hatchling.build"
 
 [tool.uv.sources]
 common = { workspace = true }
+
+[dependency-groups]
+dev = ["types-aiobotocore[s3]>=2.20.0"]

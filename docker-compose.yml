@@ -7,6 +7,9 @@ services:
       - "6001:80"
     environment:
       - CFG_PATH=./packages/nlp-api/configs/http_mode.json
+    depends_on:
+      stt-worker:
+        condition: service_started
     healthcheck:
       test: curl -f localhost:80/ping
       interval: 3s
@@ -14,6 +17,72 @@ services:
       timeout: 2s
     networks:
       - echo-hub-network
+
+  stt-worker:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.stt-worker
+    environment:
+      - CFG_PATH=./packages/stt-worker/config.json
+    depends_on:
+      s3:
+        condition: service_started
+      queue:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    networks:
+      - echo-hub-network
+
+  s3:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"  # MinIO api
+      - "9001:9001"  # MinIO UI console
+    environment:
+      - MINIO_ROOT_USER=s3-admin
+      - MINIO_ROOT_PASSWORD=s3-admin-qwerty
+    volumes:
+      - ./minio-data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - echo-hub-network
+
+  queue:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # AMQP port
+      - "15672:15672"  # UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbit
+      - RABBITMQ_DEFAULT_PASS=qwerty
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      retries: 5
+      timeout: 5s
+    networks:
+      - echo-hub-network
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=elephant
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=echo_chamber
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./migrations/init.up.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - echo-hub-network
+
 
 networks:
   echo-hub-network:
