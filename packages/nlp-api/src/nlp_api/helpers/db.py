@@ -1,13 +1,12 @@
 import logging
 from dataclasses import dataclass
-from typing import TypeAlias
 
 import asyncpg  # type: ignore
 from common import stt
 from pydantic import UUID4
 
 logger = logging.getLogger(__name__)
-Conn: TypeAlias = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection
+type Conn = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection
 
 
 @dataclass
