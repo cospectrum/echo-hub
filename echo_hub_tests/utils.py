@@ -1,3 +1,4 @@
+import asyncio
 from collections.abc import Awaitable
 
 Seconds = float
@@ -17,6 +18,6 @@ async def backoff[T](
             return await coro
         except Exception as err:
             last_err = err
-            print(f"retry {err=}")
+        await asyncio.sleep(sleep)
     assert last_err is not None
     raise last_err

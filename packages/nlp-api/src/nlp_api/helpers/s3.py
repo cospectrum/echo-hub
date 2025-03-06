@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import uuid
 from dataclasses import dataclass
@@ -20,8 +21,8 @@ class S3:
     client: S3Client
 
     async def create_buckets(self, buckets: set[str]) -> None:
-        for bucket in buckets:
-            await self.client.create_bucket(Bucket=bucket)
+        coros = [self.client.create_bucket(Bucket=bucket) for bucket in buckets]
+        await asyncio.gather(*coros)
 
     async def put(self, blob: Blob, *, bucket: str, key: Key | None = None) -> Key:
         key = key or uuid.uuid4()
