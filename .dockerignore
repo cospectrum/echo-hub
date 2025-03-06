@@ -1,0 +1,8 @@
+*
+
+!.dockerignore
+!README.md
+!LICENSE
+!uv.lock
+!pyproject.toml
+!packages
