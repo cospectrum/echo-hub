@@ -22,7 +22,7 @@ class Db:
         self, audio_key: UUID4, *, connection: Conn
     ) -> stt.SpeechToTextResult | None:
         """
-        Return task result if worker has finished.
+        Returns the result of the `task` if the worker has finished.
         ## Example
         ```python
         db = Db(pool)
