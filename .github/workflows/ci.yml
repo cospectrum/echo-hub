@@ -40,4 +40,4 @@ jobs:
       - name: pytest
         run: |
           export NLP_API_URL=http://0.0.0.0:6001
-          uv run coverage run -m pytest .
+          uv run coverage run -m pytest echo_hub_tests packages
