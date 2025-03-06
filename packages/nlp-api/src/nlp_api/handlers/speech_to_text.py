@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.post("/speech_to_text")
-async def transcribe(
+async def speech_to_text(
     audio: UploadFile,
     service: Annotated[SpeechToTextService, Depends(SpeechToTextService)],
 ) -> stt.SpeechToTextResult:
