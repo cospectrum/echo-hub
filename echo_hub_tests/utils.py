@@ -7,7 +7,7 @@ Seconds = float
 async def backoff[T](
     fn: Callable[[], Awaitable[T]],
     *,
-    retries: int = 3,
+    retries: int = 5,
     sleep: Seconds = 1,
 ) -> T:
     assert retries > 0

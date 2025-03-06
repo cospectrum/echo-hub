@@ -13,6 +13,7 @@ type Conn = asyncpg.pool.PoolConnectionProxy | asyncpg.Connection
 class Db:
     """
     Db helper (repository) for interfacing with postgres.
+    A `pool` is usually shared across the entire application to maintain multiple persistent connections.
     """
 
     pool: asyncpg.Pool
