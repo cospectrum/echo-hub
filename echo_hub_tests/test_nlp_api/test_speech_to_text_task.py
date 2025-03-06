@@ -38,7 +38,7 @@ async def test_speech_to_text_task(
         assert response.status_code == 200
         return stt.SpeechToTextResult.model_validate(response.json())
 
-    result = await backoff(get_result())
+    result = await backoff(lambda: get_result())
     assert result.language == language
     actual_segments = [seg.text.strip() for seg in result.segments]
     assert actual_segments == segments

@@ -1,11 +1,12 @@
 import asyncio
 from collections.abc import Awaitable
+from typing import Callable
 
 Seconds = float
 
 
 async def backoff[T](
-    coro: Awaitable[T],
+    fn: Callable[[], Awaitable[T]],
     *,
     retries: int = 3,
     sleep: Seconds = 1,
@@ -15,7 +16,7 @@ async def backoff[T](
     last_err = None
     for _ in range(retries):
         try:
-            return await coro
+            return await fn()
         except Exception as err:
             last_err = err
         await asyncio.sleep(sleep)
