@@ -1,6 +1,10 @@
 # nlp-api
 An API that can convert `speech to text` in both synchronous and asynchronous modes.
 
+The API provides some auxiliary requests, such as:
+- prometheus statistics via the `/metrics` endpoint
+- `/ping` for health checks
+
 ## Dev
 start fastapi app (in http_mode):
 ```sh
@@ -32,7 +36,7 @@ To run the `nlp-api` in this mode, pass the json config (via `CFG_PATH`) with th
 For example, [./configs/queue_mode.json](./configs/queue_mode.json).
 
 #### Requests
-Publish transcribe audio task and get the `audio_key` back:
+Publish `speech_to_text` task and get the `audio_key` back:
 ```sh
 curl -X 'POST' \
   'http://host:port/speech_to_text/task' \
@@ -41,7 +45,7 @@ curl -X 'POST' \
   -F 'audio=@filepath.mp3;type=audio/mpeg'
 ```
 
-Get the result of the task if it is ready:
+Get the result of the task (by `audio_key`) if it is ready:
 ```sh
 curl -X 'GET' \
   'http://host:port/speech_to_text/task?audio_key=<audio_key>' \
