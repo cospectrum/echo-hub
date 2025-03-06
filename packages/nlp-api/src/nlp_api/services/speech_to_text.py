@@ -15,7 +15,7 @@ class SpeechToTextService:
 
     async def speech_to_text(self, audio_file: UploadFile) -> stt.SpeechToTextResult:
         """
-        Run `speech_to_text` model in sync mode.
+        Run the `speech_to_text` model in sync mode.
 
         ## Invariants
         Must be called only if "http_mode" is configured.
@@ -26,7 +26,7 @@ class SpeechToTextService:
 
     async def publish_speech_to_text_task(self, audio_file: UploadFile) -> UUID4:
         """
-        Publish speech to text task to async worker.
+        Publish the `speech_to_text` task.
 
         ## Invariants
         Must be called only if "queue_mode" is configured.
@@ -52,7 +52,7 @@ class SpeechToTextService:
         self, auidio_key: UUID4
     ) -> stt.SpeechToTextResult | None:
         """
-        Get `speech_to_text` from db if worker has finished.
+        Get the `speech_to_text` task result from db if the worker has finished.
 
         ## Invariants
         Must be called only if "queue_mode" is configured.

@@ -23,7 +23,7 @@ class Queue:
         channel: aio_pika.abc.AbstractChannel,
     ) -> None:
         """
-        Publish message to fanout exchange.
+        Publish message to the fanout exchange.
 
         ## Example
         ```python
