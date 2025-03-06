@@ -24,6 +24,7 @@ uv run coverage run -m pytest .
 ```sh
 docker compose down -v
 ```
+You may need to delete some volumes manually.
 
 ## Packages
 
@@ -36,8 +37,9 @@ directly via the POST `/speech_to_text` endpoint.
 
 In `queue_mode`, the nlp-api provides a POST route `/speech_to_text/task`.
 This route saves the audio file to `S3`, sends the task (`audio_key`) to `rabbitmq`, and returns the `audio_key` to the client.
-The task is later processed by the `stt-worker`, and the result can be checked using the GET `/speech_to_text/task` route in the nlp-api.
-This route simply verifies whether the result exists in the database.
+
+The task is later processed by the `stt-worker`, and the result can be checked using the GET `/speech_to_text/task` route in the nlp-api,
+which simply verifies whether the result exists in the database.
 
 ## stt-worker
 The [stt-worker](./packages/stt-worker/) is a long-running process (or processes) that consumes tasks (`audio_key`s) from `rabbitmq`.
