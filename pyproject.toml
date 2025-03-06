@@ -1,0 +1,38 @@
+[project]
+name = "echo-hub"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.11.11"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.6.12",
+    "httpx>=0.28.1",
+    "mypy>=1.15.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "ruff>=0.9.6",
+]
+
+[tool.mypy]
+strict = true
+plugins = ['pydantic.mypy']
+
+[[tool.mypy.overrides]]
+module = ["faster_whisper"]
+follow_untyped_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+
+[tool.ruff.lint]
+extend-select = [
+    "UP", # pyupgrade
+    "I",  # isort
+]
