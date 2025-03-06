@@ -16,6 +16,5 @@ class SpeechToTextResult(BaseModel):
 
 
 class SpeechToTextTask(BaseModel):
-    trace_id: str
     audio_key: UUID4
     options: SpeechToTextOptions | None = None
