@@ -14,7 +14,7 @@ class RabbitMQSettings(BaseModel):
 
 
 class S3Buckets(BaseModel):
-    audio: str = "audio"
+    audio: str
 
 
 class S3Settings(BaseModel):

@@ -6,7 +6,7 @@ services:
     ports:
       - "6001:80"
     environment:
-      - CFG_PATH=./packages/nlp-api/configs/http_mode.json
+      - CFG_PATH=./packages/nlp-api/configs/http_and_queue_mode.json
     depends_on:
       stt-worker:
         condition: service_started

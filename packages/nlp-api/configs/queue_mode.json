@@ -1,8 +1,4 @@
 {
-    "speech_to_text": {
-        "model_size": "tiny",
-        "device": "cpu"
-    },
     "s3": {
         "url": "http://s3:9000",
         "access_key": "s3-admin",
@@ -13,8 +9,9 @@
     },
     "rabbitmq": {
         "url": "amqp://rabbit:qwerty@queue:5672",
-        "exchange": "speech_to_text",
-        "queue": "stt-workers"
+        "exchanges": {
+            "speech_to_text": "speech_to_text"
+        }
     },
     "postgres": {
         "url": "postgres://elephant:qwerty@db:5432/echo_chamber"

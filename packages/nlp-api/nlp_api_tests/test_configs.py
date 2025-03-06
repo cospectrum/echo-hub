@@ -8,6 +8,8 @@ from .const import CONFIGS_ROOT
     ["filename"],
     [
         ("http_mode.json",),
+        ("queue_mode.json",),
+        ("http_and_queue_mode.json",),
     ],
 )
 def test_configs(filename: str) -> None:
