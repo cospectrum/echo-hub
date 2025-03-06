@@ -1,5 +1,5 @@
-import io
 from dataclasses import dataclass
+from typing import BinaryIO
 
 import faster_whisper as fw
 
@@ -12,7 +12,7 @@ class SpeechToTextModel:
     _inner: fw.WhisperModel
 
     def speech_to_text(
-        self, audio: io.BytesIO, options: SpeechToTextOptions | None = None
+        self, audio: BinaryIO, options: SpeechToTextOptions | None = None
     ) -> SpeechToTextResult:
         options = options or SpeechToTextOptions()
         whisper_segments, info = self._inner.transcribe(
