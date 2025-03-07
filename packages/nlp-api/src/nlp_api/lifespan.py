@@ -1,4 +1,5 @@
 import contextlib
+import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -12,6 +13,8 @@ from pydantic_settings import BaseSettings
 
 from nlp_api import handlers, helpers, types
 from nlp_api.state import ApiCfg, ApiState
+
+logger = logging.getLogger(__name__)
 
 
 class Settings(BaseSettings):
@@ -74,7 +77,13 @@ async def build_state(cfg: ApiCfg) -> AsyncIterator[ApiState]:
             s3_client: types.S3Client = await stack.enter_async_context(s3_client_ctx)  # pyright: ignore
             s3 = helpers.S3(s3_client)
             buckets = [cfg.s3.buckets.audio]
-            await s3.create_buckets(set(buckets))
+            for bucket in buckets:
+                try:
+                    await s3.create_bucket(bucket)
+                except Exception as err:
+                    logger.warning(
+                        "failed to create buckek: %s", {"err": err, "bucket": bucket}
+                    )
 
         yield ApiState(
             cfg=cfg,
